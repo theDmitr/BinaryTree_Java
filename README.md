@@ -19,6 +19,8 @@ Tree tree = new Tree();
 | findNode | Search for a node by value. Returns an object of type ```Node``` or ```null```. | ```tree.findNode(integer);``` |
 | insertNode | Insert node by value. Returns a ```Tree``` object. | ```tree.insertNode(integer);``` |
 | deleteNode | Delete node by value. Returns a ```Tree``` object. | ```tree.deleteNode(integer);``` |
+| getMin | Get the minimum node from the tree. Returns a ```Node``` object. | ```tree.getMin();``` |
+| getMax | Get the maximum node from the tree. Returns a ```Node``` object. | ```tree.getMax();``` |
 
 ## Node
 
