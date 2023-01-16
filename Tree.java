@@ -1,58 +1,127 @@
 package test;
 
+import static java.lang.System.out;
+
 public class Tree {
-	private Node rootNode;
-	
+
+	public static void main(String[] args) {
+		Tree tree = new Tree();
+		tree.insertNode(7).insertNode(4).insertNode(3).insertNode(6).insertNode(5).insertNode(8).insertNode(10)
+				.insertNode(9).insertNode(11);
+		tree.deleteNode(10);
+		out.println(tree.getRootNode());
+	}
+
+	private Node root;
+
 	public Node findNode(int value) {
-		Node currentNode = rootNode;
-		if (rootNode != null) {
-			while (currentNode.getValue() != value) {
-				if (value < currentNode.getValue()) currentNode = currentNode.getLeftChild();
-				else currentNode = currentNode.getRightChild();
-				if (currentNode == null) break;
+		Node current = root;
+		if (root != null) {
+			while (current.getValue() != value) {
+				if (value < current.getValue())
+					current = current.getLeftChild();
+				else
+					current = current.getRightChild();
+				if (current == null)
+					break;
 			}
 		}
-		return currentNode;
+		return current;
 	}
-	
+
 	public Tree insertNode(int value) {
 		Node node = new Node().setValue(value);
-		if (rootNode == null) rootNode = node;
+		if (root == null)
+			root = node;
 		else {
-			Node currentNode = rootNode;
+			Node current = root;
 			while (true) {
-				if (value == currentNode.getValue()) break;
-				if (value < currentNode.getValue()) {
-					if (currentNode.getLeftChild() == null) {
-						currentNode.setLeftChild(node);
+				if (value == current.getValue())
+					break;
+				if (value < current.getValue()) {
+					if (current.getLeftChild() == null) {
+						current.setLeftChild(node);
 						break;
 					}
-					currentNode = currentNode.getLeftChild();
-				}
-				else {
-					if (currentNode.getRightChild() == null) {
-						currentNode.setRightChild(node);
+					current = current.getLeftChild();
+				} else {
+					if (current.getRightChild() == null) {
+						current.setRightChild(node);
 						break;
 					}
-					currentNode = currentNode.getRightChild();
+					current = current.getRightChild();
 				}
 			}
 		}
 		return this;
 	}
-	
+
+	public Tree deleteNode(int value) {
+		if (root != null) {
+			Node current = root;
+			Node parent = root;
+			boolean isLeftChild = false;
+			while (current.getValue() != value) {
+				parent = current;
+				if (value < current.getValue()) {
+					current = current.getLeftChild();
+					isLeftChild = true;
+				} else {
+					current = current.getRightChild();
+					isLeftChild = false;
+				}
+				if (current == null)
+					return this;
+			}
+			if (current.getLeftChild() == null && current.getRightChild() == null) {
+				if (current == root)
+					root = null;
+				else if (isLeftChild)
+					parent.setLeftChild(null);
+				else
+					parent.setRightChild(null);
+			} else if (current.getRightChild() == null) {
+				if (current == root)
+					root = current.getLeftChild();
+				else if (isLeftChild)
+					parent.setLeftChild(current.getLeftChild());
+				else
+					parent.setRightChild(current.getLeftChild());
+			} else if (current.getLeftChild() == null) {
+				if (current == root)
+					root = current.getRightChild();
+				else if (isLeftChild)
+					parent.setLeftChild(current.getRightChild());
+				else
+					parent.setRightChild(current.getRightChild());
+			} else {
+				if (current == root) {
+					root = current.getRightChild();
+					root.getSuccessor().setLeftChild(current.getLeftChild());
+				} else if (isLeftChild) {
+					parent.setLeftChild(current.getRightChild());
+					parent.getLeftChild().getSuccessor().setLeftChild(current.getLeftChild());
+				} else {
+					parent.setRightChild(current.getRightChild());
+					parent.getRightChild().getSuccessor().setLeftChild(current.getLeftChild());
+				}
+			}
+		}
+		return this;
+	}
+
 	public Tree setRootNode(Node node) {
-		this.rootNode = node;
+		this.root = node;
 		return this;
 	}
 
 	public Node getRootNode() {
-		return this.rootNode;
+		return this.root;
 	}
 
 	@Override
 	public String toString() {
-		return "Root node: " + this.rootNode;
+		return "Root node: " + this.root;
 	}
 }
 
@@ -86,6 +155,13 @@ class Node {
 
 	public Node getRightChild() {
 		return this.rightChild;
+	}
+
+	public Node getSuccessor() {
+		Node temp = this;
+		while (temp.getLeftChild() != null)
+			temp = temp.getLeftChild();
+		return temp;
 	}
 
 	@Override
