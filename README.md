@@ -18,6 +18,7 @@ Tree tree = new Tree();
 | getRootNode | Get the root of the tree. Returns a ```Node``` object or ```null```. | ```tree.getRootNode();``` |
 | findNode | Search for a node by value. Returns an object of type ```Node``` or ```null```. | ```tree.findNode(integer);``` |
 | insertNode | Insert node by value. Returns a ```Tree``` object. | ```tree.insertNode(integer);``` |
+| deleteNode | Delete node by value. Returns a ```Tree``` object. | ```tree.deleteNode(integer);``` |
 
 ## Node
 
