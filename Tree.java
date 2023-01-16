@@ -1,17 +1,6 @@
 package test;
 
-import static java.lang.System.out;
-
 public class Tree {
-
-	public static void main(String[] args) {
-		Tree tree = new Tree();
-		tree.insertNode(7).insertNode(4).insertNode(3).insertNode(6).insertNode(5).insertNode(8).insertNode(10)
-				.insertNode(9).insertNode(11);
-		tree.deleteNode(10);
-		out.println(tree.getRootNode());
-	}
-
 	private Node root;
 
 	public Node findNode(int value) {
@@ -157,7 +146,7 @@ class Node {
 		return this.rightChild;
 	}
 
-	public Node getSuccessor() {
+	protected Node getSuccessor() {
 		Node temp = this;
 		while (temp.getLeftChild() != null)
 			temp = temp.getLeftChild();
