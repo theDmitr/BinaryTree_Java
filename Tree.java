@@ -99,24 +99,6 @@ public class Tree {
 		return this;
 	}
 
-	public Node getMin() {
-		if (root == null)
-			return null;
-		Node temp = root;
-		while (temp.getLeftChild() != null)
-			temp = temp.getLeftChild();
-		return temp;
-	}
-
-	public Node getMax() {
-		if (root == null)
-			return null;
-		Node temp = root;
-		while (temp.getRightChild() != null)
-			temp = temp.getRightChild();
-		return temp;
-	}
-
 	public Tree setRootNode(Node node) {
 		this.root = node;
 		return this;
