@@ -1,6 +1,7 @@
 package test;
 
 public class Tree {
+	
 	private Node root;
 
 	public Node findNode(int value) {
@@ -104,14 +105,11 @@ public class Tree {
 		return this;
 	}
 
-	public Node getRootNode() {
-		return this.root;
-	}
+	public Node getRootNode() { return this.root; }
 
 	@Override
-	public String toString() {
-		return "Root node: " + this.root;
-	}
+	public String toString() { return "Root node: " + this.root; }
+	
 }
 
 class Node {
@@ -134,17 +132,9 @@ class Node {
 		return this;
 	}
 
-	public int getValue() {
-		return this.value;
-	}
-
-	public Node getLeftChild() {
-		return this.leftChild;
-	}
-
-	public Node getRightChild() {
-		return this.rightChild;
-	}
+	public int getValue() { return this.value; }
+	public Node getLeftChild() { return this.leftChild; }
+	public Node getRightChild() { return this.rightChild; }
 
 	protected Node getSuccessor() {
 		Node temp = this;
